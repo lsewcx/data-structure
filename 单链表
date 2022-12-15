@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+const int N=100010;
+//head表示头结点下标
+//e[i]表示头结点的i是多少
+//ne[i]表示i的next指针是多少
+//idx存储当前用到了哪个地址
+int head,e[N],ne[N],idx;
+//初始化
+void init()
+{
+    head=-1;
+    idx=0;
+}
+//将x插入头结点
+void add_to_head(int x)
+{
+    e[idx]=x;//x存入
+    ne[idx]=head;//
+    head=idx;//head指向插入的指针
+    idx++;//移向下一个位置
+}
+//x插入下标是k的点后面
+void add(int k,int x)
+{
+    e[idx]=x;
+    ne[idx]=ne[k];
+    ne[k]=idx;
+    idx++;
+}
+//将下标是k的后面的点删掉
+void remove(int k)
+{
+    ne[k]=ne[ne[k]];
+}
