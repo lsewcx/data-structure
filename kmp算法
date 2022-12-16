@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+const int N=1e6+10;
+int ne[N];
+int la,lb;
+char a[N],b[N];
+int main()
+{
+    cin>>a+1;
+    cin>>b+1;
+    la=strlen(a+1);
+    lb=strlen(b+1);
+    //预处理next函数
+    for(int i=2,j=0;i<=lb;i++)
+    {
+        while(j&&b[i]!=b[j+1])j=ne[j];
+        if(b[i]==b[j+1])j++;
+        ne[i]=j;
+    }
+    //匹配
+    for(int i=1,j=0;i<=la;i++)
+    {
+        while(j&&a[i]!=b[j+1])j=ne[j];
+        if(a[i]==b[j+1])j++;
+        if(j==lb)printf("%d\n",i-lb+1);
+    }
+    for(int i=1;i<=lb;i++)
+    {
+        cout<<ne[i]<<" ";
+    }
+    return 0;
+}
